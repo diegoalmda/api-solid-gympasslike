@@ -1,15 +1,15 @@
-import { InMemoruUsersRepository } from '@/repositories/in-memory/in-memory-users-repository'
+import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-users-repository'
 import { compare } from 'bcryptjs'
 import { expect, describe, it, beforeEach } from 'vitest'
 import { UserAlreadyExistsError } from './errors/user-already-exists-error'
 import { RegisterUseCase } from './register'
 
-let usersRepository: InMemoruUsersRepository
+let usersRepository: InMemoryUsersRepository
 let sut: RegisterUseCase // system under test
 
 describe('register Use Case', () => {
   beforeEach(() => {
-    usersRepository = new InMemoruUsersRepository()
+    usersRepository = new InMemoryUsersRepository()
     sut = new RegisterUseCase(usersRepository)
   })
 
@@ -47,7 +47,7 @@ describe('register Use Case', () => {
       password: '123456',
     })
 
-    expect(() =>
+    await expect(() =>
       sut.execute({
         name: 'John Doe',
         email,
