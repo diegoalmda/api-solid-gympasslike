@@ -31,6 +31,16 @@ export async function authenticate(
       },
     )
 
+    // const refreshToken = await reply.jwtSign(
+    //   {},
+    //   {
+    //     sign: {
+    //       sub: user.id,
+    //       expiresIn: '7d',
+    //     },
+    //   },
+    // )
+
     return reply.status(200).send({
       token,
     })
